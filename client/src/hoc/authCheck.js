@@ -18,9 +18,10 @@ export function withAuthCheck(Component, option) {
 
             const response = await dispatch(auth())
 
-            //로그인 하지않은 상태 + 로그인한 유저만 출입 가능한 곳 -> 로그인 페이지
+            //로그인 하지않은 상태 + 로그인 안한 유저 -> 로그인 페이지
             if ((!response.payload.isAuth) && (option)) return props.history.push('/login')
-            //로그인 한 상태 + 로그인 한 유저는 출입불가 -> 랜딩페이지
+
+            //로그인 한 상태 + 로그인 한 유저 -> 랜딩페이지
             if ((response.payload.isAuth) && (!option)) return props.history.push('/')
 
         }, []) //처음에만 호출
